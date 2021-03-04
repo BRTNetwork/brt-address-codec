@@ -1,7 +1,7 @@
 {
-  "name": "ripple-address-codec",
+  "name": "brt-address-codec",
   "version": "4.1.2",
-  "description": "encodes/decodes base58 encoded XRP Ledger identifiers",
+  "description": "encodes/decodes base58 encoded BR Ledger identifiers",
   "files": [
     "dist/*",
     "build/*"

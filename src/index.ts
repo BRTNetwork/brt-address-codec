@@ -9,7 +9,7 @@ import {
   encodeAccountPublic,
   decodeAccountPublic,
   isValidClassicAddress
-} from './xrp-codec'
+} from './brt-codec'
 import * as assert from 'assert'
 
 const PREFIX_BYTES = {
@@ -118,13 +118,13 @@ function isValidXAddress(xAddress: string): boolean {
 }
 
 export {
-  codec, // Codec with XRP alphabet
+  codec, // Codec with BR alphabet
   encodeSeed, // Encode entropy as a "seed"
   decodeSeed, // Decode a seed into an object with its version, type, and bytes
   encodeAccountID, // Encode bytes as a classic address (r...)
   decodeAccountID, // Decode a classic address to its raw bytes
-  encodeNodePublic, // Encode bytes to XRP Ledger node public key format
-  decodeNodePublic, // Decode an XRP Ledger node public key into its raw bytes
+  encodeNodePublic, // Encode bytes to BR Ledger node public key format
+  decodeNodePublic, // Decode an BR Ledger node public key into its raw bytes
   encodeAccountPublic, // Encode a public key, as for payment channels
   decodeAccountPublic, // Decode a public key, as for payment channels
   isValidClassicAddress, // Check whether a classic address (r...) is valid
