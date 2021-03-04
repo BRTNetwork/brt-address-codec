@@ -1,4 +1,4 @@
-import * as api from './xrp-codec'
+import * as api from './brt-codec'
 
 function toHex(bytes: Buffer) {
   return Buffer.from(bytes).toString('hex').toUpperCase()
@@ -27,7 +27,7 @@ function makeEncodeDecodeTest(encoder: Function, decoder: Function, base58: stri
   })
 }
 
-makeEncodeDecodeTest(api.encodeAccountID, api.decodeAccountID, 'rJrRMgiRgrU6hDF4pgu5DXQdWyPbY35ErN',
+makeEncodeDecodeTest(api.encodeAccountID, api.decodeAccountID, 'bHbQLCqQCbBgsUoMrCu6UWPcVy42Xf6NbD',
   'BA8E78626EE42C41B46D46C3048DF3A1C3C87072')
 
 makeEncodeDecodeTest(api.encodeNodePublic, api.decodeNodePublic,
@@ -39,26 +39,27 @@ makeEncodeDecodeTest(api.encodeNodePublic, api.decodeNodePublic,
     '023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6')
 
 test('can decode arbitrary seeds', function() {
-  const decoded = api.decodeSeed('sEdTM1uX8pu2do5XvTnutH6HsouMaM2')
-  expect(toHex(decoded.bytes)).toBe('4C3A1D213FBDFB14C7C28D609469B341')
+  const decoded = api.decodeSeed('tnwMbSVjA5Xc2Fr2G1NvsSacSuagb')
+  expect(toHex(decoded.bytes)).toBe('FA108667ACC8201FEC41C2B2ED8C410A')
   expect(decoded.type).toBe('ed25519')
 
-  const decoded2 = api.decodeSeed('sn259rEFXrQrWyx3Q7XneWcwV6dfL')
+  const decoded2 = api.decodeSeed('ttYtgJoAzFm9qnZXctLs97qEcXhcR')
   expect(toHex(decoded2.bytes)).toBe('CF2DE378FBDD7E2EE87D486DFB5A7BFF')
   expect(decoded2.type).toBe('secp256k1')
 })
 
 test('can pass a type as second arg to encodeSeed', function() {
-  const edSeed = 'sEdTM1uX8pu2do5XvTnutH6HsouMaM2'
+
+  const edSeed = 'tnwMbSVjA5Xc2Fr2G1NvsSacSuagb'
   const decoded = api.decodeSeed(edSeed)
   const type = 'ed25519'
-  expect(toHex(decoded.bytes)).toBe('4C3A1D213FBDFB14C7C28D609469B341')
+  expect(toHex(decoded.bytes)).toBe('FA108667ACC8201FEC41C2B2ED8C410A')
   expect(decoded.type).toBe(type)
   expect(api.encodeSeed(decoded.bytes, type)).toBe(edSeed)
 })
 
 test('isValidClassicAddress - secp256k1 address valid', function() {
-  expect(api.isValidClassicAddress('rU6K7V3Po4snVhBBaU29sesqs2qTQJWDw1')).toBe(true)
+  expect(api.isValidClassicAddress('bJwZDLvLrDSLV5XP89ADJW1Qq1mF87g44A')).toBe(true)
 })
 
 test('isValidClassicAddress - ed25519 address valid', function() {
@@ -77,32 +78,32 @@ describe('encodeSeed', function() {
 
   it('encodes a secp256k1 seed', function() {
     const result = api.encodeSeed(Buffer.from('CF2DE378FBDD7E2EE87D486DFB5A7BFF', 'hex'), 'secp256k1')
-    expect(result).toBe('sn259rEFXrQrWyx3Q7XneWcwV6dfL')
+    expect(result).toBe('ttYtgJoAzFm9qnZXctLs97qEcXhcR')
   })
 
   it('encodes low secp256k1 seed', function() {
     const result = api.encodeSeed(Buffer.from('00000000000000000000000000000000', 'hex'), 'secp256k1')
-    expect(result).toBe('sp6JS7f14BuwFY8Mw6bTtLKWauoUs')
+    expect(result).toBe('trgHRTaiMwu9oXmL9g2S1KJVnu8Bt')
   })
 
   it('encodes high secp256k1 seed', function() {
     const result = api.encodeSeed(Buffer.from('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF', 'hex'), 'secp256k1')
-    expect(result).toBe('saGwBRReqUNKuWNLpUAq8i8NkXEPN')
+    expect(result).toBe('tnE9wQQdFBDJuVDKrBAFmqmDjWN4D')
   })
 
   it('encodes an ed25519 seed', function() {
-    const result = api.encodeSeed(Buffer.from('4C3A1D213FBDFB14C7C28D609469B341', 'hex'), 'ed25519')
-    expect(result).toBe('sEdTM1uX8pu2do5XvTnutH6HsouMaM2')
+    const result = api.encodeSeed(Buffer.from('FA108667ACC8201FEC41C2B2ED8C410A', 'hex'), 'ed25519')
+    expect(result).toBe('tnwMbSVjA5Xc2Fr2G1NvsSacSuagb')
   })
 
   it('encodes low ed25519 seed', function() {
     const result = api.encodeSeed(Buffer.from('00000000000000000000000000000000', 'hex'), 'ed25519')
-    expect(result).toBe('sEdSJHS4oiAdz7w2X2ni1gFiqtbJHqE')
+    expect(result).toBe('tNcRHGRM8qAczT9ZWZhqiCoqF12HGFN')
   })
 
   it('encodes high ed25519 seed', function() {
     const result = api.encodeSeed(Buffer.from('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF', 'hex'), 'ed25519')
-    expect(result).toBe('sEdV19BLfeQeKdEXyYA4NhjPJe6XBfG')
+    expect(result).toBe('tNc7i3wKadPdJcNWyXAMDs54HdgWwaE')
   })
 
   test('attempting to encode a seed with less than 16 bytes of entropy throws', function() {
@@ -121,13 +122,13 @@ describe('encodeSeed', function() {
 describe('decodeSeed', function() {
 
   it('can decode an Ed25519 seed', function() {
-    const decoded = api.decodeSeed('sEdTM1uX8pu2do5XvTnutH6HsouMaM2')
-    expect(toHex(decoded.bytes)).toBe('4C3A1D213FBDFB14C7C28D609469B341')
+    const decoded = api.decodeSeed('tnwMbSVjA5Xc2Fr2G1NvsSacSuagb')
+    expect(toHex(decoded.bytes)).toBe('FA108667ACC8201FEC41C2B2ED8C410A')
     expect(decoded.type).toBe('ed25519')
   })
 
   it('can decode a secp256k1 seed', function() {
-    const decoded = api.decodeSeed('sn259rEFXrQrWyx3Q7XneWcwV6dfL')
+    const decoded = api.decodeSeed('ttYtgJoAzFm9qnZXctLs97qEcXhcR')
     expect(toHex(decoded.bytes)).toBe('CF2DE378FBDD7E2EE87D486DFB5A7BFF')
     expect(decoded.type).toBe('secp256k1')
   })
@@ -137,7 +138,7 @@ describe('encodeAccountID', function() {
 
   it('can encode an AccountID', function() {
     const encoded = api.encodeAccountID(Buffer.from('BA8E78626EE42C41B46D46C3048DF3A1C3C87072', 'hex'))
-    expect(encoded).toBe('rJrRMgiRgrU6hDF4pgu5DXQdWyPbY35ErN')
+    expect(encoded).toBe('bHbQLCqQCbBgsUoMrCu6UWPcVy42Xf6NbD')
   })
 
   test('unexpected length should throw', function() {
@@ -161,12 +162,12 @@ test('encodes 123456789 with version byte of 0', () => {
   expect(api.codec.encode(Buffer.from('123456789'), {
     versions: [0],
     expectedLength: 9
-  })).toBe('rnaC7gW34M77Kneb78s')
+  })).toBe('bhneTCVfMLTTJhd2Tmt')
 })
 
 test('multiple versions with no expected length should throw', () => {
   expect(() => {
-    api.codec.decode('rnaC7gW34M77Kneb78s', {
+    api.codec.decode('bhneTCVfMLTTJhd2Tmt', {
       versions: [0, 1]
     })
   }).toThrow('expectedLength is required because there are >= 2 possible versions')
@@ -182,7 +183,7 @@ test('attempting to decode data with length < 5 should throw', () => {
 
 test('attempting to decode data with unexpected version should throw', () => {
   expect(() => {
-    api.codec.decode('rnaC7gW34M77Kneb78s', {
+    api.codec.decode('bhneTCVfMLTTJhd2Tmt', {
       versions: [2]
     })
   }).toThrow('version_invalid: version bytes do not match any of the provided version(s)')
@@ -205,7 +206,7 @@ test('empty payload should throw', () => {
 })
 
 test('decode data', () => {
-  expect(api.codec.decode('rnaC7gW34M77Kneb78s', {
+  expect(api.codec.decode('bhneTCVfMLTTJhd2Tmt', {
     versions: [0]
   })).toStrictEqual({
     version: [0],
@@ -215,7 +216,7 @@ test('decode data', () => {
 })
 
 test('decode data with expected length', function() {
-  expect(api.codec.decode('rnaC7gW34M77Kneb78s', {
+  expect(api.codec.decode('bhneTCVfMLTTJhd2Tmt', {
       versions: [0],
       expectedLength: 9
     })
@@ -228,7 +229,7 @@ test('decode data with expected length', function() {
 
 test('decode data with wrong expected length should throw', function() {
   expect(() => {
-    api.codec.decode('rnaC7gW34M77Kneb78s', {
+    api.codec.decode('bhneTCVfMLTTJhd2Tmt', {
       versions: [0],
       expectedLength: 8
     })
@@ -236,7 +237,7 @@ test('decode data with wrong expected length should throw', function() {
     'version_invalid: version bytes do not match any of the provided version(s)'
   )
   expect(() => {
-    api.codec.decode('rnaC7gW34M77Kneb78s', {
+    api.codec.decode('bhneTCVfMLTTJhd2Tmt', {
       versions: [0],
       expectedLength: 10
     })
