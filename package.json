@@ -1,5 +1,5 @@
 {
-  "name": "brt-address-codec",
+  "name": "@brtnetwork/brt-address-codec",
   "version": "4.1.2",
   "description": "encodes/decodes base58 encoded BRT Ledger identifiers",
   "files": [
