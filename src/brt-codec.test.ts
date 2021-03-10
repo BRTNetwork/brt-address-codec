@@ -44,7 +44,7 @@ test('can decode arbitrary seeds', function() {
   expect(decoded.type).toBe('ed25519')
 
   const decoded2 = api.decodeSeed('ttYtgJoAzFm9qnZXctLs97qEcXhcR')
-  expect(toHex(decoded2.bytes)).toBe('CF2DE378FBDD7E2EE87D486DFB5A7BFF')
+  expect(toHex(decoded2.bytes)).toBe('3D905024239E36212668429331837367')
   expect(decoded2.type).toBe('secp256k1')
 })
 
@@ -77,7 +77,7 @@ test('isValidClassicAddress - empty', function() {
 describe('encodeSeed', function() {
 
   it('encodes a secp256k1 seed', function() {
-    const result = api.encodeSeed(Buffer.from('CF2DE378FBDD7E2EE87D486DFB5A7BFF', 'hex'), 'secp256k1')
+    const result = api.encodeSeed(Buffer.from('3D905024239E36212668429331837367', 'hex'), 'secp256k1')
     expect(result).toBe('ttYtgJoAzFm9qnZXctLs97qEcXhcR')
   })
 
@@ -114,7 +114,7 @@ describe('encodeSeed', function() {
 
   test('attempting to encode a seed with more than 16 bytes of entropy throws', function() {
     expect(() => {
-      api.encodeSeed(Buffer.from('CF2DE378FBDD7E2EE87D486DFB5A7BFFFF', 'hex'), 'secp256k1')
+      api.encodeSeed(Buffer.from('3D905024239E36212668429331837367FF', 'hex'), 'secp256k1')
     }).toThrow('entropy must have length 16')
   })
 })
@@ -129,7 +129,7 @@ describe('decodeSeed', function() {
 
   it('can decode a secp256k1 seed', function() {
     const decoded = api.decodeSeed('ttYtgJoAzFm9qnZXctLs97qEcXhcR')
-    expect(toHex(decoded.bytes)).toBe('CF2DE378FBDD7E2EE87D486DFB5A7BFF')
+    expect(toHex(decoded.bytes)).toBe('3D905024239E36212668429331837367')
     expect(decoded.type).toBe('secp256k1')
   })
 })
