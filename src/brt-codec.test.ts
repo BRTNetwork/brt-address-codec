@@ -31,16 +31,16 @@ makeEncodeDecodeTest(api.encodeAccountID, api.decodeAccountID, 'bHbQLCqQCbBgsUoM
   'BA8E78626EE42C41B46D46C3048DF3A1C3C87072')
 
 makeEncodeDecodeTest(api.encodeNodePublic, api.decodeNodePublic,
-  'n9MXXueo837zYH36DvMc13BwHcqtfAWNJY5czWVbp7uYTj7x17TH',
-  '0388E5BA87A000CB807240DF8C848EB0B5FFA5C8E5A521BC8E105C0F0A44217828')
+  'h3KFiHtRNLf1qzB7veSF9dHWBindiZiUEb77EZ5HKmcMHMN85i4v',
+  '032ED4D80AC2383BDF25AFB282930CE26668D7FC0FCFE20CA620972009403662AB')
 
   makeEncodeDecodeTest(api.encodeAccountPublic, api.decodeAccountPublic,
-    'aB44YfzW24VDEJQ2UuLPV2PvqcPCSoLnL7y5M1EzhdW4LnK5xMS3',
-    '023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6')
+    'nwPNiQY5TQXqCpGi8BDh5qxvAuVU6VkHPnqPwk3xmfuLECckomre',
+    '032ED4D80AC2383BDF25AFB282930CE26668D7FC0FCFE20CA620972009403662AB')
 
 test('can decode arbitrary seeds', function() {
-  const decoded = api.decodeSeed('tnwMbSVjA5Xc2Fr2G1NvsSacSuagb')
-  expect(toHex(decoded.bytes)).toBe('FA108667ACC8201FEC41C2B2ED8C410A')
+  const decoded = api.decodeSeed('tNcSG5rcM3gmds5LFpUQaqQPjvhoDLH')
+  expect(toHex(decoded.bytes)).toBe('47165A58B08D4E10D60533ACFCCFD2FB')
   expect(decoded.type).toBe('ed25519')
 
   const decoded2 = api.decodeSeed('ttYtgJoAzFm9qnZXctLs97qEcXhcR')
@@ -50,10 +50,10 @@ test('can decode arbitrary seeds', function() {
 
 test('can pass a type as second arg to encodeSeed', function() {
 
-  const edSeed = 'tnwMbSVjA5Xc2Fr2G1NvsSacSuagb'
+  const edSeed = 'tNcSG5rcM3gmds5LFpUQaqQPjvhoDLH'
   const decoded = api.decodeSeed(edSeed)
   const type = 'ed25519'
-  expect(toHex(decoded.bytes)).toBe('FA108667ACC8201FEC41C2B2ED8C410A')
+  expect(toHex(decoded.bytes)).toBe('47165A58B08D4E10D60533ACFCCFD2FB')
   expect(decoded.type).toBe(type)
   expect(api.encodeSeed(decoded.bytes, type)).toBe(edSeed)
 })
@@ -63,11 +63,11 @@ test('isValidClassicAddress - secp256k1 address valid', function() {
 })
 
 test('isValidClassicAddress - ed25519 address valid', function() {
-  expect(api.isValidClassicAddress('rLUEXYuLiQptky37CqLcm9USQpPiz5rkpD')).toBe(true)
+  expect(api.isValidClassicAddress('btWZxuKqsfieVcxwvJXH8TbsQmWF2uAGNx')).toBe(true)
 })
 
 test('isValidClassicAddress - invalid', function() {
-  expect(api.isValidClassicAddress('rU6K7V3Po4snVhBBaU29sesqs2qTQJWDw2')).toBe(false)
+  expect(api.isValidClassicAddress('btWZxuKqsfieVcxwvJXH8TbsQmWF2uAGNt')).toBe(false)
 })
 
 test('isValidClassicAddress - empty', function() {
@@ -92,8 +92,8 @@ describe('encodeSeed', function() {
   })
 
   it('encodes an ed25519 seed', function() {
-    const result = api.encodeSeed(Buffer.from('FA108667ACC8201FEC41C2B2ED8C410A', 'hex'), 'ed25519')
-    expect(result).toBe('tnwMbSVjA5Xc2Fr2G1NvsSacSuagb')
+    const result = api.encodeSeed(Buffer.from('47165A58B08D4E10D60533ACFCCFD2FB', 'hex'), 'ed25519')
+    expect(result).toBe('tNcSG5rcM3gmds5LFpUQaqQPjvhoDLH')
   })
 
   it('encodes low ed25519 seed', function() {
@@ -122,8 +122,8 @@ describe('encodeSeed', function() {
 describe('decodeSeed', function() {
 
   it('can decode an Ed25519 seed', function() {
-    const decoded = api.decodeSeed('tnwMbSVjA5Xc2Fr2G1NvsSacSuagb')
-    expect(toHex(decoded.bytes)).toBe('FA108667ACC8201FEC41C2B2ED8C410A')
+    const decoded = api.decodeSeed('tNcSG5rcM3gmds5LFpUQaqQPjvhoDLH')
+    expect(toHex(decoded.bytes)).toBe('47165A58B08D4E10D60533ACFCCFD2FB')
     expect(decoded.type).toBe('ed25519')
   })
 
@@ -153,8 +153,8 @@ describe('encodeAccountID', function() {
 describe('decodeNodePublic', function() {
 
   it('can decode a NodePublic', function() {
-    const decoded = api.decodeNodePublic('n9MXXueo837zYH36DvMc13BwHcqtfAWNJY5czWVbp7uYTj7x17TH')
-    expect(toHex(decoded)).toBe('0388E5BA87A000CB807240DF8C848EB0B5FFA5C8E5A521BC8E105C0F0A44217828')
+    const decoded = api.decodeNodePublic('h3KFiHtRNLf1qzB7veSF9dHWBindiZiUEb77EZ5HKmcMHMN85i4v')
+    expect(toHex(decoded)).toBe('032ED4D80AC2383BDF25AFB282930CE26668D7FC0FCFE20CA620972009403662AB')
   })
 })
 

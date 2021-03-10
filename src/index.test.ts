@@ -211,7 +211,7 @@ const testCases = [
 }
 
 {
-  const xAddress = 'S7PJpUwqWZj4AHvLMYenNjsQUEdgJyPEeYXE9Pvbif25Nao'
+  const xAddress = 'EJuCaMjPrp7njtSjvwvnhKNVX4zNNHSwfRyod39fqjdwbVEC'
   test(`Invalid X-address (bad prefix): Converting ${xAddress} throws`, () => {
     expect(() => {
       xAddressToClassicAddress(xAddress)
@@ -223,10 +223,10 @@ test(`Invalid X-address (64-bit tag) throws`, () => {
   expect(() => {
     // Encoded from:
     // {
-    //   classicAddress: 'rGWrZyQqhTp9Xu7G5Pkayo7bXjH4k4QYpf',
+    //   classicAddress: 'bJwZDLvLrDSLV5XP89ADJW1Qq1mF87g44A',
     //   tag: MAX_32_BIT_UNSIGNED_INT + 1
     // }
-    xAddressToClassicAddress('XVLhHMPHU98es4dbozjVtdWzVrDjtV18pX8zeUygYrCgrPh')
+    xAddressToClassicAddress('W7T8BariecBM783jnjvJLjHV5Fa1o4uunxVtUvVMvPH5BYj')
   }).toThrowError('Unsupported X-address')
 })
 
