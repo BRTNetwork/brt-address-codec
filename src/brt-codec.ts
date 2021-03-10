@@ -117,7 +117,7 @@ class Codec {
 }
 
 /**
- * BR codec
+ * BRT codec
  */
 
 // Pure JavaScript hash functions in the browser, native hash functions in Node.js

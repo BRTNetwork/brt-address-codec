@@ -118,13 +118,13 @@ function isValidXAddress(xAddress: string): boolean {
 }
 
 export {
-  codec, // Codec with BR alphabet
+  codec, // Codec with BRT alphabet
   encodeSeed, // Encode entropy as a "seed"
   decodeSeed, // Decode a seed into an object with its version, type, and bytes
   encodeAccountID, // Encode bytes as a classic address (r...)
   decodeAccountID, // Decode a classic address to its raw bytes
-  encodeNodePublic, // Encode bytes to BR Ledger node public key format
-  decodeNodePublic, // Decode an BR Ledger node public key into its raw bytes
+  encodeNodePublic, // Encode bytes to BRT Ledger node public key format
+  decodeNodePublic, // Decode an BRT Ledger node public key into its raw bytes
   encodeAccountPublic, // Encode a public key, as for payment channels
   decodeAccountPublic, // Decode a public key, as for payment channels
   isValidClassicAddress, // Check whether a classic address (r...) is valid

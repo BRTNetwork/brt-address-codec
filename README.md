@@ -5,7 +5,7 @@
 [![Build Status][travis-image]][travis-url]
 [![Test Coverage][coveralls-image]][coveralls-url]
 
-Functions for encoding and decoding BR Ledger addresses and seeds.
+Functions for encoding and decoding BRT Ledger addresses and seeds.
 
 Also includes support for encoding/decoding [rippled validator (node) public keys](https://xrpl.org/run-rippled-as-a-validator.html).
 
@@ -13,7 +13,7 @@ Also includes support for encoding/decoding [rippled validator (node) public key
 
 ## X-address Conversion
 
-All tools and apps in the BR Ledger ecosystem are encouraged to adopt support for the X-address format. The X-address format is a single Base58 string that encodes an 'Account ID', a (destination) tag, and whether the address is intended for a test network. This prevents users from unintentionally omitting the destination tag when sending and receiving payments and other transactions.
+All tools and apps in the BRT Ledger ecosystem are encouraged to adopt support for the X-address format. The X-address format is a single Base58 string that encodes an 'Account ID', a (destination) tag, and whether the address is intended for a test network. This prevents users from unintentionally omitting the destination tag when sending and receiving payments and other transactions.
 
 ## API
 
@@ -69,7 +69,7 @@ Returns `false` for X-addresses (extended addresses). To validate an X-address, 
 
 ### encodeSeed(entropy: Buffer, type: 'ed25519' | 'secp256k1'): string
 
-Encode the given entropy as an BR Ledger seed (secret). The entropy must be exactly 16 bytes (128 bits). The encoding includes which elliptic curve digital signature algorithm (ECDSA) the seed is intended to be used with. The seed is used to produce the private key.
+Encode the given entropy as an BRT Ledger seed (secret). The entropy must be exactly 16 bytes (128 bits). The encoding includes which elliptic curve digital signature algorithm (ECDSA) the seed is intended to be used with. The seed is used to produce the private key.
 
 ### decodeSeed(seed: string): object
 
@@ -94,13 +94,13 @@ Decode a classic address (starting with `r`...) to its raw bytes.
 
 ### encodeNodePublic(bytes: Buffer): string
 
-Encode bytes to the BR Ledger "node public key" format (base58).
+Encode bytes to the BRT Ledger "node public key" format (base58).
 
 This is useful for rippled validators.
 
 ### decodeNodePublic(base58string: string): Buffer
 
-Decode an BR Ledger "node public key" (in base58 format) into its raw bytes.
+Decode an BRT Ledger "node public key" (in base58 format) into its raw bytes.
 
 ### encodeAccountPublic(bytes: Buffer): string
 
@@ -116,7 +116,7 @@ Encode account ID, tag, and network ID to X-address.
 
 `accountId` must be 20 bytes because it is a RIPEMD160 hash, which is 160 bits (160 bits = 20 bytes).
 
-At this time, `tag` must be <= MAX_32_BIT_UNSIGNED_INT (4294967295) as the BR Ledger only supports 32-bit tags.
+At this time, `tag` must be <= MAX_32_BIT_UNSIGNED_INT (4294967295) as the BRT Ledger only supports 32-bit tags.
 
 If `test` is `true`, this address is intended for use with a test network such as Testnet or Devnet.
 
