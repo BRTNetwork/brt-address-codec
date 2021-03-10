@@ -1,7 +1,7 @@
 {
   "name": "brt-address-codec",
   "version": "4.1.2",
-  "description": "encodes/decodes base58 encoded BR Ledger identifiers",
+  "description": "encodes/decodes base58 encoded BRT Ledger identifiers",
   "files": [
     "dist/*",
     "build/*"
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/ripple/ripple-address-codec.git"
+    "url": "git://github.com/BRTNetwork/js-brt-address-codec.git"
   },
   "prepublish": "tsc",
   "prepublishOnly": "tslint -p ./ && jest",
